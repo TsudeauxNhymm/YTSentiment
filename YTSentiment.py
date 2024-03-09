@@ -10,60 +10,39 @@ from matplotlib import pyplot as plt
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from sklearn import linear_model
 
-
-# In[13]:
-
-
-df = pd.read_csv("USvideos.csv",index_col=0)[["title","views","tags"]]
-
-
-# In[17]:
-
-
 sent_obj = SentimentIntensityAnalyzer()
+OLS = linear_model.LinearRegression()
+
+
 def sent(input):
     sdict = sent_obj.polarity_scores(input)
     return sdict["compound"]
 
 
-# In[25]:
+def analyze_data_set():
+    # reads data set and does sentiment analysis on each element
+    df = pd.read_csv("USvideos.csv",index_col=0)[["title","views","tags"]]
+    l = [sent(i) for i in df.title] #takes a while
+    
+    # adds sentiment analysis column to the data frame
+    df["title_sentiment"] = l
+    # plt.plot(df["title_sentiment"],df["views"],"*")
+
+    # maps to a linear regression model
+    OLS.fit(df.title_sentiment.to_numpy().reshape(-1,1),df.views.to_numpy().reshape(-1,1))
+
+def analyze_input(input):
+    return OLS.predict(np.array(sent(input, sent_obj)).reshape(-1,1))
 
 
-l = [sent(i) for i in df.title] #takes a while
+def main():
+    input = "How to fix a car"
+    analyze_data_set()
+    analyze_input(input)
 
 
-# In[23]:
-
-
-
-
-
-# In[26]:
-
-
-df["title_sentiment"] = l
-
-
-# In[34]:
-
-
-plt.plot(df["title_sentiment"],df["views"],"*")
-
-
-# In[43]:
-
-
-OLS = linear_model.LinearRegression()
-OLS.fit(df.title_sentiment.to_numpy().reshape(-1,1),df.views.to_numpy().reshape(-1,1))
-
-
-# In[63]:
-
-
-OLS.predict(np.array(sent("hi there, ye who are destinced for death")).reshape(-1,1))
-
-
-# In[ ]:
+if __name__ == "__main__":
+    main()
 
 
 
