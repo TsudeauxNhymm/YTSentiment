@@ -21,7 +21,7 @@ def sent(input):
 
 def analyze_data_set():
     # reads data set and does sentiment analysis on each element
-    df = pd.read_csv("USvideos.csv",index_col=0)[["title","views","tags"]]
+    df = pd.read_csv("data/USvideos.csv",index_col=0)[["title","views","tags"]]
     l = [sent(i) for i in df.title] #takes a while
     
     # adds sentiment analysis column to the data frame
@@ -31,6 +31,7 @@ def analyze_data_set():
     # maps to a linear regression model
     OLS.fit(df.title_sentiment.to_numpy().reshape(-1,1),df.views.to_numpy().reshape(-1,1))
 
+
 def analyze_input(input):
     # Returns a string. 
     array_result = OLS.predict(np.array(sent(input)).reshape(-1,1))
@@ -39,7 +40,7 @@ def analyze_input(input):
 
 
 def main():
-    input = "How to fix a car"
+    input = ""
     analyze_data_set()
     print(f"For input: '{input}' the result of analysis is: {analyze_input(input)}")
 
