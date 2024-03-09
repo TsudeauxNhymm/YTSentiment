@@ -32,13 +32,16 @@ def analyze_data_set():
     OLS.fit(df.title_sentiment.to_numpy().reshape(-1,1),df.views.to_numpy().reshape(-1,1))
 
 def analyze_input(input):
-    return OLS.predict(np.array(sent(input, sent_obj)).reshape(-1,1))
+    # Returns a string. 
+    array_result = OLS.predict(np.array(sent(input)).reshape(-1,1))
+    array_string = np.array2string(array_result, precision=0, separator=',').replace('[', '').replace(']', '').replace('.', '')
+    return array_string
 
 
 def main():
     input = "How to fix a car"
     analyze_data_set()
-    analyze_input(input)
+    print(f"For input: '{input}' the result of analysis is: {analyze_input(input)}")
 
 
 if __name__ == "__main__":
