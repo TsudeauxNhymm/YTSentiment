@@ -18,11 +18,24 @@ Upon loading the page it calls the analyze_csv fn.
 def analyze_fetch():
     analyze_data_set()
     body = request.data.decode('utf-8')
-    analysis_result = "Title is empty" if body == "" else analyze_input(body)
+    analysis_result = analyze_input(body)
+    
+    # analysis_result = "Title is empty" if body == "" else analyze_input(body)
 
 
     """
-    # result = "Sentiment of title: {Positive}"
+    # result = 
+    Sentiment of title: {Positive}
+    Projected number of views: {633,000} views
+
+
+    number_str = "633000"
+    formatted_number = f"{int(number_str):,}"
+    print(formatted_number)
+
+
+
+
     # 
     """
 
