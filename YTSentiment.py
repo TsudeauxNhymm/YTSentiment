@@ -18,6 +18,14 @@ def sent(input):
     sdict = sent_obj.polarity_scores(input)
     return sdict["compound"]
 
+def sent_string(sentiment):  #takes in the output from the sent function
+    if sentiment > 0.05:
+        return "overall positive"   #feel free to change the strings if you want.
+    elif sentiment < -.05:
+        return "overall negative"
+    else:
+        return "neutral"
+
 
 def analyze_data_set():
     # reads data set and does sentiment analysis on each element
