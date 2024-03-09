@@ -8,42 +8,39 @@ def index():
     return render_template('index.html')
 
 
-# TODO:
-"""
-Upon loading the page it calls the analyze_csv fn. 
-"""
-
-
-@app.route('/analyze_fetch', methods=['POST', 'GET'], )
-def analyze_fetch():
+@app.route('/analyze', methods=['POST', 'GET'], )
+def analyze():
     analyze_data_set()
     body = request.data.decode('utf-8')
-    analysis_result = analyze_input(body)
+
+    if body == "": 
+        sentiment_result = "neutral"
+        analysis_result = "(The title was empty)"
+        return jsonify({
+            'sentiment': sentiment_result,
+            'views': analysis_result
+        })
     
-    # analysis_result = "Title is empty" if body == "" else analyze_input(body)
-
-
-    """
-    # result = 
-    Sentiment of title: {Positive}
-    Projected number of views: {633,000} views
-
-
-    number_str = "633000"
-    formatted_number = f"{int(number_str):,}"
-    print(formatted_number)
-
-
-
-
-    # 
-    """
-
-
-
-
-
-    analysis_result = analyze_input(request.data.decode('utf-8'))
+    # if not empty then do the analysis and return 
+    sentiment_result = sent_string(sent(body))   
+    analysis_result = analyze_input(body)
     return jsonify({
-        'result': analysis_result
+        'sentiment': sentiment_result,
+        'views': analysis_result
     })
+
+    # """
+    # # result = 
+    # Sentiment of title: {Positive}
+    # Projected number of views: {633,000} views
+
+
+    # number_str = "633000"
+    # formatted_number = f"{int(number_str):,}"
+    # print(formatted_number)
+
+
+
+
+    # # 
+    # """

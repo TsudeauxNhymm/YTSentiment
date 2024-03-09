@@ -2,8 +2,7 @@ function analyze_title() {
     // TODO: suck out the input
     const inputValue = document.getElementById('title-to-analyze').value;
     
-    // TODO: Send it in the body. 
-    fetch('/analyze_fetch', {
+    fetch('/analyze', {
         method: 'POST',
         body: inputValue
     })
