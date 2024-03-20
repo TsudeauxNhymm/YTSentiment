@@ -5,11 +5,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #FAFAFA;
 }
 
 /* Header styles */
 header {
-    background-color: #333;
+    background-color: #002D5F;
     color: #fff;
     padding: 10px 0;
     text-align: center;
@@ -18,7 +19,7 @@ header {
 /* Main content styles */
 .main-content {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 32px;
     padding: 20px;
 }
 
@@ -28,4 +29,14 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
+}
+
+
+/* Custom styles for output container */
+#output-container {
+    background-color: #002D5F;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }

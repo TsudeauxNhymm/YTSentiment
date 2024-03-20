@@ -14,7 +14,14 @@ function analyze_title() {
     })
     .then(data => {
         const result = data.result;
-        document.getElementById('output').textContent = result;
+        const sentiment = data['sentiment'];
+        // const views = data['views'];
+        const views = Number(data['views']).toLocaleString(); 
+        console.log(views); 
+        console.log(sentiment); 
+        document.getElementById('output-sentiment').textContent = `Sentiment: ${sentiment}`;
+        document.getElementById('output-views').textContent = `Projected Views: ${views}`;
+
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error); 

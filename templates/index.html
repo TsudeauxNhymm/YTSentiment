@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Predictor by Sentiment</title>
+    <title>PREDICT VIEW</title>
     <!-- External CSS -->
     <link rel="stylesheet" href="../static/style.css">
 </head>
 <body>
     <!-- Your content here -->
-    <header>View Predictor by Sentiment</header>
-    <p class="main-content">Muffins and puffins</p>
+    <header>VIEW PREDICTOR</header>
+    <p class="main-content"> Use our machine learning model to find the number of views you'll get based on the emotional tone (sentiment) of your Youtube video title! Note that the model was trained with a set of trending videos, meaning that the prediction might be skewed in favor of high view counts.</p>
     <input class="main-content" id="title-to-analyze" type="text" placeholder="Enter a title to analyze...">
-    <button id="my-button">Click Here</button>
-    <p class="main-content" id="output"></p>
+    <button id="my-button">Analyze</button>
+    <h5 class="main-content">OUTPUT:</h5>
+    <div class="main-content" id="output-container">
+        <div id="output-sentiment"></div>
+        <div id="output-views"></div>
+    </div>
+    
     
     <!-- External JavaScript -->
     <script src="../static/script.js"></script>
